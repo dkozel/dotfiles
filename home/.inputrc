@@ -1,0 +1,6 @@
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+
+# Include system wide settings which are ignored
+# by default if one has their own .inputrc
+$include /etc/inputrc
