@@ -1,0 +1,8 @@
+Run the following commands to setup the files for use
+
+rm .bashrc .inputrc .vimrc .bash_aliases
+ln -s dotfiles/home/.bashrc .bashrc
+ln -s dotfiles/home/.inputrc .inputrc
+ln -s dotfiles/home/.vimrc .vimrc
+ln -s dotfiles/home/.vim .vim
+ln -s dotfiles/home/.bash_aliases .bash_aliases
