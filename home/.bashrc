@@ -18,3 +18,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
     alias grep='grep --color=auto'
 fi
+
+# enable homeshick
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+homeshick --quiet refresh
