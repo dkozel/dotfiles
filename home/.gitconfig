@@ -1,0 +1,11 @@
+[color]
+    ui = auto
+    grep = auto
+
+[core]
+    pager = less -r
+[user]
+	name = Derek Kozel
+	email = derek.kozel@gmail.com
+[merge]
+	tool = meld
