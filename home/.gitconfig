@@ -9,3 +9,5 @@
 	email = derek.kozel@gmail.com
 [merge]
 	tool = meld
+[push]
+	default = simple
