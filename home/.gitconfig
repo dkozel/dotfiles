@@ -4,10 +4,19 @@
 
 [core]
     pager = less -r
+
 [user]
 	name = Derek Kozel
 	email = derek.kozel@gmail.com
+
 [merge]
 	tool = meld
+
 [push]
 	default = simple
+
+[diff]
+	tool = meld
+
+[difftool]
+	prompt = false
