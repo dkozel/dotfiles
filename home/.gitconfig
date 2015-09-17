@@ -7,7 +7,7 @@
 
 [user]
 	name = Derek Kozel
-	email = derek.kozel@gmail.com
+    email = derekkozel@nameloop.com
 
 [merge]
 	tool = meld
@@ -20,3 +20,10 @@
 
 [difftool]
 	prompt = false
+
+[credential]
+    helper = cache --timeout=3600
+
+[alias]
+    track = add --intent-to-add
+    track-all = !git add --intent-to-add $(git ls-files -o --exclude-standard)
