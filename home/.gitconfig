@@ -7,7 +7,6 @@
 
 [user]
 	name = Derek Kozel
-    email = derekkozel@nameloop.com
 
 [merge]
 	tool = meld
