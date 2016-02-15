@@ -33,3 +33,7 @@ fi
 # enable homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 homeshick --quiet refresh
+
+# enable git completion
+source "$HOME/.git-completion.bash"
+
