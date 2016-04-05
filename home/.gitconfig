@@ -26,3 +26,6 @@
 [alias]
     track = add --intent-to-add
     track-all = !git add --intent-to-add $(git ls-files -o --exclude-standard)
+
+[include]
+    path = ~/.gitconfig.local
