@@ -39,3 +39,8 @@ if [ -f ~/.git-completion.bash ]; then
     source "$HOME/.git-completion.bash"
 fi
 
+# enable rbenv if installed
+if [ -d ~/.rbenv/bin ]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
