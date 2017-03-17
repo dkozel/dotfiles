@@ -29,6 +29,7 @@
 [alias]
     track = add --intent-to-add
     track-all = !git add --intent-to-add $(git ls-files -o --exclude-standard)
+    set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
 
 [include]
     path = ~/.gitconfig_local
