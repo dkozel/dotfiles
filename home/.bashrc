@@ -35,8 +35,13 @@ source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 homeshick --quiet refresh
 
 # enable git completion
-if [ -f ~/.git-completion.bash ]; then
-    source "$HOME/.git-completion.bash"
+if [ -f "$HOME/.git-bashcompletion.bash" ]; then
+    . "$HOME/.git-completion.bash"
+fi
+
+# enable hub completion
+if [ -f "$HOME/.hub.bash_completion.sh" ]; then
+    . "$HOME/.hub.bash_completion.sh"
 fi
 
 # enable rbenv if installed
