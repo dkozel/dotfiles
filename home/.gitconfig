@@ -1,6 +1,3 @@
-[include]
-    path = ~/.gitconfig_local
-
 [color]
     ui = auto
     grep = auto
@@ -33,3 +30,8 @@
 
 [include]
     path = ~/.gitconfig_local
+
+[gpg]
+	program = gpg2
+[help]
+	autocorrect = 30
