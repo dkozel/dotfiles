@@ -27,6 +27,9 @@
     track = add --intent-to-add
     track-all = !git add --intent-to-add $(git ls-files -o --exclude-standard)
     set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+    push-upstream = !git push --set-upstream origin `git symbolic-ref --short HEAD`
+    cd-base = !cd $(git rev-parse --show-toplevel)
+    undo-commit = reset --soft HEAD~1
 
 [include]
     path = ~/.gitconfig_local
