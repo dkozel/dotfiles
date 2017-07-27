@@ -35,7 +35,7 @@ source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 homeshick --quiet refresh
 
 # enable git completion
-if [ -f "$HOME/.git-bashcompletion.bash" ]; then
+if [ -f "$HOME/.git-completion.bash" ]; then
     . "$HOME/.git-completion.bash"
 fi
 
