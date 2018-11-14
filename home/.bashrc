@@ -1,5 +1,11 @@
 # Author        : Derek Kozel <derek.kozel@gmail.com>
 
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 # [username@hostname directory]
 export PS1='\[\033[1;37m\][\[\033[0;32m\]\u\[\033[0;37m\]@\[\033[0;32m\]\h \[\033[0;36m\]\W\[\033[1;37m\]] \[\e[0m\]'
 
@@ -14,6 +20,10 @@ HISTFILESIZE=-1
 HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -30,9 +40,16 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
 fi
 
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 # enable homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-homeshick --quiet refresh
+homeshick --quiet refresh 2
 
 # enable git completion
 if [ -f "$HOME/.git-completion.bash" ]; then
