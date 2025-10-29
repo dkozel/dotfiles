@@ -47,10 +47,6 @@ fi
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# enable homeshick
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-homeshick --quiet refresh 2
-
 # enable git completion
 if [ -f "$HOME/.git-completion.bash" ]; then
     . "$HOME/.git-completion.bash"
@@ -66,3 +62,6 @@ if [ -d ~/.rbenv/bin ]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 fi
+
+# Setup use of git bare repo in ~/.dotfiles to manage dotfiles
+alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
