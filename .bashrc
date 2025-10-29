@@ -15,7 +15,7 @@ PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
 export EDITOR=/usr/bin/vim
 
 # Maintain a merged history across all shells
-HISTSIZE=5000
+HISTSIZE=50000
 HISTFILESIZE=-1
 HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
