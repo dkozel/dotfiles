@@ -65,3 +65,6 @@ fi
 
 # Setup use of git bare repo in ~/.dotfiles to manage dotfiles
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+
+# Add .local/bin to the PATH (for uv)
+. "$HOME/.local/bin/env"
