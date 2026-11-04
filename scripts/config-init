@@ -1,22 +1,42 @@
 #!/usr/bin/env bash
-git clone --bare git@github.com:dkozel/dotfiles.git $HOME/.dotfiles 
+# Install these dotfiles into $HOME from a bare git repo in ~/.dotfiles.
+#
+#   curl -fsSL https://raw.githubusercontent.com/dkozel/dotfiles/master/scripts/config-init | bash
+#
+# Clones over https (no SSH key needed yet) and pushes over SSH. Existing files
+# that would be overwritten are moved to ~/.dotfiles-backup/<timestamp>/.
+set -euo pipefail
 
-# define config alias locally since the dotfiles
-# aren't installed on the system yet
-function config {
-   git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
-}
+REPO_HTTPS=https://github.com/dkozel/dotfiles.git
+REPO_SSH=git@github.com:dkozel/dotfiles.git
+GIT_DIR="$HOME/.dotfiles"
+BACKUP="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
-# create a directory to backup existing dotfiles to
-mkdir -p .dotfiles-backup
-config checkout
-if [ $? = 0 ]; then
-  echo "Checked out dotfiles from git@github.com:dkozel/dotfiles.git";
-  else
-    echo "Moving existing dotfiles to ~/.dotfiles-backup";
-    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .dotfiles-backup/{}
+config() { git --git-dir="$GIT_DIR" --work-tree="$HOME" "$@"; }
+
+if [ -e "$GIT_DIR" ]; then
+    echo "$GIT_DIR already exists; use 'config pull' to update." >&2
+    exit 1
 fi
 
-# checkout dotfiles from repo
-config checkout
+git clone --bare "$REPO_HTTPS" "$GIT_DIR"
+config remote set-url --push origin "$REPO_SSH"
+# A bare clone has no remote-tracking branches; add them so status shows ahead/behind.
+config config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+config fetch -q origin
+config branch -q --set-upstream-to="origin/$(config symbolic-ref --short HEAD)"
 config config status.showUntrackedFiles no
+
+# Move aside any existing files the checkout would overwrite.
+moved=0
+while IFS= read -r f; do
+    if [ -e "$HOME/$f" ] || [ -L "$HOME/$f" ]; then
+        mkdir -p "$BACKUP/$(dirname "$f")"
+        mv "$HOME/$f" "$BACKUP/$f"
+        moved=$((moved + 1))
+    fi
+done < <(config ls-tree -r --name-only HEAD)
+[ "$moved" -gt 0 ] && echo "Moved $moved existing file(s) to $BACKUP"
+
+config checkout
+echo "Dotfiles installed. Open a new shell to pick them up; manage them with 'config'."

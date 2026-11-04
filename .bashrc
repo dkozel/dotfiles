@@ -66,5 +66,8 @@ fi
 # Setup use of git bare repo in ~/.dotfiles to manage dotfiles
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
-# Add .local/bin to the PATH (for uv)
-. "$HOME/.local/bin/env"
+# Toolchain PATH setup (uv, rustup), only where installed
+for f in "$HOME/.local/bin/env" "$HOME/.local/share/cargo/env" "$HOME/.cargo/env"; do
+    [ -f "$f" ] && . "$f"
+done
+unset f
